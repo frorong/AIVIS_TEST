@@ -6,7 +6,7 @@ import type { LoginType } from "@/types";
 import type { UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
-export const usePostBoardContent = (
+export const usePostLogin = (
   options?: UseMutationOptions<unknown, AxiosError, LoginType>
 ) =>
   useMutation({
