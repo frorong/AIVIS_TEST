@@ -4,11 +4,10 @@ import { Input } from "@/components";
 import { usePostLogin } from "@/hooks";
 import { LoginType } from "@/types";
 import { setCookie } from "@/utils";
+import { PROJECT_PAGE_PATH } from "@/constant";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-const PROJECT_PAGE_PATH = "/project";
 
 const LoginPage = () => {
   const [userName, setUserName] = useState<string>("coding_test");
