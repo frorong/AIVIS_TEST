@@ -3,8 +3,6 @@
 import { useGetProjectList } from "@/hooks";
 import { ProjectCard } from "@/components";
 
-import { useEffect } from "react";
-
 const ProjectPage = () => {
   const { data: projectList } = useGetProjectList();
 
