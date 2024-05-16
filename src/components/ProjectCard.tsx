@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { CollectionType } from "@/types";
 import { ToggleCloseIcon, ToggleOpenIcon } from "@/assets";
+import { PROJECT_PAGE_PATH } from "@/constant";
+
+import { useRouter } from "next/navigation";
 
 const ProjectCard: React.FC<CollectionType> = ({
   id,
@@ -12,11 +15,20 @@ const ProjectCard: React.FC<CollectionType> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { push } = useRouter();
+
+  const onNameClick = () => push(`${PROJECT_PAGE_PATH}/${id}`);
+
   return (
     <div className="bg-white shadow-md mb-4">
       <div className="border-b px-4 py-2 flex justify-between items-center">
         <div>
-          <p className="text-lg font-semibold text-gray-500">name: {name}</p>
+          <p
+            className="text-lg font-semibold text-gray-500 cursor-pointer"
+            onClick={onNameClick}
+          >
+            name: {name}
+          </p>
           <p className="text-lg font-semibold text-gray-500">
             numberOfImages: {numberOfImages}
           </p>
