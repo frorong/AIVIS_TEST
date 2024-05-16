@@ -1,4 +1,9 @@
 export interface LoginType {
-  usename: string;
+  username: string;
   password: string;
+}
+
+export interface TokenType {
+  token: string;
+  shortTermToken: string;
 }

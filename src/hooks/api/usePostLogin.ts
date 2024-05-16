@@ -1,16 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { authQueryKeys, authUrl, post } from "@/libs";
-import type { LoginType } from "@/types";
+import type { LoginType, TokenType } from "@/types";
 
 import type { UseMutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
-export const usePostBoardContent = (
-  options?: UseMutationOptions<unknown, AxiosError, LoginType>
+export const usePostLogin = (
+  options?: UseMutationOptions<TokenType, AxiosError, LoginType>
 ) =>
   useMutation({
     mutationKey: authQueryKeys.loginKey(),
-    mutationFn: (userInfo: LoginType) => post(authUrl.loginUrl(), userInfo),
+    mutationFn: (userInfo: LoginType) =>
+      post<TokenType>(authUrl.loginUrl(), userInfo),
     ...options,
   });
