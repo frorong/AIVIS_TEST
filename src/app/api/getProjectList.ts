@@ -4,18 +4,13 @@ import { redirect } from "next/navigation";
 import { projectUrl } from "@/libs";
 import type { ProjectType } from "@/types";
 
-export const getProjectList = async (searchParams?: {
-  [key: string]: string | string[] | undefined;
-}): Promise<ProjectType> => {
+export const getProjectList = async (
+  offset: number,
+  max: number
+): Promise<ProjectType> => {
   const accessToken = cookies().get("accessToken")?.value;
 
   if (!accessToken) return redirect("/auth/refresh");
-
-  const offsetParam = searchParams?.offset?.[0];
-  const offset = offsetParam ? parseInt(offsetParam) : 0;
-
-  const maxParam = searchParams?.max?.[0];
-  const max = maxParam ? parseInt(maxParam) : 0;
 
   const response = await fetch(
     new URL(

@@ -2,14 +2,22 @@
 
 import { useGetProjectList } from "@/hooks";
 import { ProjectCard, PaginationController } from "@/components";
+import { ProjectType } from "@/types";
+
 import { useEffect, useState } from "react";
 
-const ProjectPage = () => {
-  const { data: projectList } = useGetProjectList();
+interface Props {
+  initialData: ProjectType;
+  offset: number;
+  max: number;
+}
 
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [perPageCount, setPerPageCount] = useState<number>(10);
+const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
+  const { data: projectList } = useGetProjectList(initialData);
+
+  const [currentPage, setCurrentPage] = useState<number>(offset / 10);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentMax, setCurrentMax] = useState<number>(max);
 
   useEffect(() => {
     if (projectList) setTotalPages(projectList.totalPages);
@@ -23,6 +31,7 @@ const ProjectPage = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}
+          currentMax={currentMax}
         />
       </section>
       <section>

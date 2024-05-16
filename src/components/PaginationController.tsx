@@ -1,9 +1,14 @@
 import React, { Dispatch, SetStateAction } from "react";
 
+import { useRouter } from "next/navigation";
+
+import { PROJECT_PAGE_PATH } from "@/constant";
+
 interface Props {
   currentPage: number;
   totalPages: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  currentMax: number;
 }
 
 const ItemStyle =
@@ -14,9 +19,15 @@ const PaginationController: React.FC<Props> = ({
   currentPage,
   totalPages,
   setCurrentPage,
+  currentMax,
 }) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
+
+  const { push } = useRouter();
+
+  const paginate = (page: number) =>
+    push(`${PROJECT_PAGE_PATH}?offset=${page}&max=${currentMax}`);
 
   return (
     <div className="flex justify-center mt-4">
@@ -24,7 +35,7 @@ const PaginationController: React.FC<Props> = ({
         <ul className="pagination flex">
           <li
             className={`${ItemStyle} ${isFirstPage ? "disabled" : ""}`}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
+            onClick={() => paginate(currentPage - 1)}
           >
             <button className={ButtonStyle} disabled={isFirstPage}>
               이전
@@ -37,7 +48,7 @@ const PaginationController: React.FC<Props> = ({
               className={`${ItemStyle} ${
                 pageNumber + 1 === currentPage ? "active" : ""
               }`}
-              onClick={() => setCurrentPage(pageNumber + 1)}
+              onClick={() => paginate(pageNumber + 1)}
             >
               <button className={ButtonStyle}>{pageNumber + 1}</button>
             </li>
@@ -45,7 +56,7 @@ const PaginationController: React.FC<Props> = ({
 
           <li
             className={`${ItemStyle} ${isLastPage ? "disabled" : ""}`}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
+            onClick={() => paginate(currentPage + 1)}
           >
             <button className={ButtonStyle} disabled={isLastPage}>
               다음

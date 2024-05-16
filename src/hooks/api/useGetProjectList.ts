@@ -7,6 +7,7 @@ import { minutesToMs } from "@/utils";
 import type { UseQueryOptions } from "@tanstack/react-query";
 
 export const useGetProjectList = (
+  initialData?: ProjectType,
   options?: Omit<UseQueryOptions<ProjectType>, "queryKey">
 ) =>
   useQuery({
@@ -14,5 +15,6 @@ export const useGetProjectList = (
     queryFn: () => get<ProjectType>(projectUrl.getProjectListUrl()),
     staleTime: minutesToMs(5),
     gcTime: minutesToMs(5),
+    initialData: initialData,
     ...options,
   });
