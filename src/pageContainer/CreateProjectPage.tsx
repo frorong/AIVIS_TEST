@@ -5,8 +5,6 @@ import { Input } from "@/components";
 import { ProjectRequestType } from "@/types";
 import { PROJECT_PAGE_PATH } from "@/constant";
 
-import { useRouter } from "next/navigation";
-
 import { useState } from "react";
 
 const ONTOLOGY_ID = 34956166 as const;
@@ -14,11 +12,9 @@ const ONTOLOGY_ID = 34956166 as const;
 const CreateProjectPage = () => {
   const [name, setName] = useState<string>("");
 
-  const { push } = useRouter();
-
   const { mutate: create } = usePostProject({
     onSuccess: () => {
-      push(PROJECT_PAGE_PATH);
+      location.href = PROJECT_PAGE_PATH;
     },
   });
 

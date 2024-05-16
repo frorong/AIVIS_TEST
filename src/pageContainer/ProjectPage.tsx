@@ -41,11 +41,19 @@ const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
           <option value="20">20</option>
           <option value="30">30</option>
         </select>
-        <PaginationController
-          currentPage={offset}
-          totalPages={totalPages}
-          currentMax={max}
-        />
+        {totalPages && (
+          <PaginationController
+            currentPage={offset}
+            totalPages={totalPages}
+            currentMax={max}
+          />
+        )}
+        <button
+          className="cursor-pointer text-gray-500"
+          onClick={() => push(`${PROJECT_PAGE_PATH}/create`)}
+        >
+          프로젝트 추가{" "}
+        </button>
       </section>
       <section>
         {projectList &&
