@@ -1,4 +1,15 @@
+"use client";
+
+import { useGetProjectList } from "@/hooks";
+import { useEffect } from "react";
+
 const ProjectPage = () => {
+  const { data: projectList } = useGetProjectList();
+
+  useEffect(() => {
+    console.log(projectList);
+  }, [projectList]);
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white p-8 rounded shadow-md w-80">
