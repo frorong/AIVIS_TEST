@@ -11,7 +11,7 @@ interface Props {
 }
 
 const DetailPage: React.FC<Props> = ({ projectId }) => {
-  const { data: projectList } = useGetProjectList();
+  const { data: projectList } = useGetProjectList(0, 1000);
   const [filteredProject, setProjectIndex] = useState<
     CollectionType | undefined
   >();

@@ -3,7 +3,7 @@ export const authUrl = {
 };
 
 export const projectUrl = {
-  projectUrl: () => "/project.json",
+  postProjectUrl: () => "/project.json",
   getProjectListUrl: (
     offset?: string,
     max?: string,
