@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 
 import { ProjectPage } from "@/pageContainer";
 import { LOGIN_PAGE_PATH } from "@/constant";
-
 import { getProjectList } from "@/app/api";
+import { sortType, orderType } from "@/types";
 
 interface Params {
   searchParams?: { [key: string]: string | string[] | undefined };
@@ -19,13 +19,30 @@ const Project: React.FC<Params> = async ({ searchParams }) => {
 
   const maxParam = searchParams?.max;
   const max = typeof maxParam === "string" ? parseInt(maxParam) : 10;
-  console.log(offsetParam, maxParam);
 
-  const projectList = await getProjectList(offset, max);
+  const sortParam = searchParams?.sort;
+  const sort = (
+    typeof offsetParam === "string" ? sortParam : "created"
+  ) as sortType;
+
+  const orderParam = searchParams?.order;
+  const order = (
+    typeof orderParam === "string" ? orderParam : "desc"
+  ) as orderType;
+
+  const projectList = await getProjectList(offset, max, sort, order);
 
   if (!token && !shortTermToken) redirect(LOGIN_PAGE_PATH);
 
-  return <ProjectPage initialData={projectList} offset={offset} max={max} />;
+  return (
+    <ProjectPage
+      initialData={projectList}
+      offset={offset}
+      max={max}
+      order={order}
+      sort={sort}
+    />
+  );
 };
 
 export default Project;
