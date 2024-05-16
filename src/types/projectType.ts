@@ -33,3 +33,8 @@ export interface CollectionType {
   age: unknown;
   status: string;
 }
+
+export interface ProjectRequestType {
+  name: string;
+  ontologyId: number;
+}
