@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(response.data);
   },
   async (error) => {
-    if (error.response.status === 401) {
+    if ([401, 403].includes(error.response.status)) {
       location.href = "/auth/login";
     }
 
