@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-const PROJECT_PAGE_PATH = "/project";
+import { PROJECT_PAGE_PATH } from "@/constant";
 
 export default async function Home() {
   redirect(PROJECT_PAGE_PATH);
