@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "plugins": ["node"],
+
+  "rules": {
+    "node/no-missing-require": "off"
+  }
 }
