@@ -7,7 +7,6 @@ import { PROJECT_PAGE_PATH } from "@/constant";
 interface Props {
   currentPage: number;
   totalPages: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   currentMax: number;
 }
 
@@ -18,7 +17,6 @@ const ButtonStyle = "text-gray-500 cursor-pointer" as const;
 const PaginationController: React.FC<Props> = ({
   currentPage,
   totalPages,
-  setCurrentPage,
   currentMax,
 }) => {
   const isFirstPage = currentPage === 1;

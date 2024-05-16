@@ -3,31 +3,32 @@ import { redirect } from "next/navigation";
 
 import { projectUrl } from "@/libs";
 import type { ProjectType } from "@/types";
+import { LOGIN_PAGE_PATH } from "@/constant";
 
 export const getProjectList = async (
   offset: number,
   max: number
 ): Promise<ProjectType> => {
-  const accessToken = cookies().get("accessToken")?.value;
+  const token = cookies().get("token")?.value;
+  const shortTermToken = cookies().get("shortTermToken")?.value;
 
-  if (!accessToken) return redirect("/auth/refresh");
+  if (!token && !shortTermToken) redirect(LOGIN_PAGE_PATH);
 
   const response = await fetch(
     new URL(
-      `/api/v1${projectUrl.getProjectListUrl(
-        offset.toString(),
-        max.toString()
-      )}`,
-      process.env.BASE_URL
+      `${
+        process.env.NEXT_PUBLIC_API_BASE_URL
+      }/api${projectUrl.getProjectListUrl(offset.toString(), max.toString())}`,
+      process.env.NEXT_PUBLIC_API_BASE_URL
     ),
     {
       method: "GET",
-      headers: { Cookie: `accessToken=${accessToken}` },
+      headers: { Authorization: `Bearer ${token}` },
     }
   );
 
   if (!response.ok) {
-    return redirect("/auth/login");
+    return redirect(LOGIN_PAGE_PATH);
   }
 
   const project: ProjectType = await response.json();
