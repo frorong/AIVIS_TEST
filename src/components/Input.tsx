@@ -14,7 +14,7 @@ const Input: React.FC<Props> = ({
   disabled = false,
 }) => (
   <div className="mb-4">
-    <label htmlFor="input" className="block text-sm font-medium text-gray-700">
+    <label htmlFor="input" className="block text-sm font-medium text-white">
       {text}
     </label>
     <input
@@ -25,7 +25,8 @@ const Input: React.FC<Props> = ({
       disabled={disabled}
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
-      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-700"
+      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-700
+      text-gray-700"
     />
   </div>
 );

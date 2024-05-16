@@ -3,16 +3,24 @@
 import { Input } from "@/components";
 import { usePostLogin } from "@/hooks";
 import { LoginType } from "@/types";
+import { setCookie } from "@/utils";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const PROJECT_PAGE_PATH = "/project";
 
 const LoginPage = () => {
   const [userName, setUserName] = useState<string>("coding_test");
   const [userPassword, setUserPassword] = useState<string>("coding0000");
 
+  const { push } = useRouter();
+
   const { mutate: login } = usePostLogin({
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: ({ token, shortTermToken }) => {
+      setCookie("token", token, 3);
+      setCookie("shortTermToken", shortTermToken, 1);
+      push(PROJECT_PAGE_PATH);
     },
   });
 
@@ -28,7 +36,7 @@ const LoginPage = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white p-8 rounded shadow-md w-80">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">로그인</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-white">로그인</h2>
         <Input
           text={"user name"}
           inputValue={userName}
