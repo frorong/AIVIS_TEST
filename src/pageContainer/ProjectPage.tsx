@@ -12,12 +12,28 @@ interface Props {
   initialData: ProjectType;
   offset: number;
   max: number;
+  sort: "created" | "name";
+  order: "asc" | "desc";
 }
 
-const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
-  const { data: projectList } = useGetProjectList(max, offset, initialData);
+const ProjectPage: React.FC<Props> = ({
+  initialData,
+  offset,
+  max,
+  sort: initialSort,
+  order: initialOrder,
+}) => {
+  const { data: projectList } = useGetProjectList(
+    max,
+    offset,
+    initialSort,
+    initialOrder,
+    initialData
+  );
 
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [order, setOrder] = useState<"desc" | "asc">(initialOrder);
+  const [sort, setSort] = useState<"created" | "name">(initialSort);
 
   const { push } = useRouter();
 
@@ -26,7 +42,13 @@ const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
   }, [projectList]);
 
   const paginate = (max: number) =>
-    push(`${PROJECT_PAGE_PATH}?offset=${offset}&max=${max}`);
+    push(
+      `${PROJECT_PAGE_PATH}?offset=${offset}&max=${max}&order=${order}&sort=${sort}`
+    );
+
+  useEffect(() => {
+    paginate(max);
+  }, [order, sort]);
 
   return (
     <div className="bg-white p-8 rounded shadow-md w-80">
@@ -48,11 +70,27 @@ const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
             currentMax={max}
           />
         )}
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value as "created" | "name")}
+          className="cursor-pointer text-gray-500"
+        >
+          <option value="created">created</option>
+          <option value="name">name</option>
+        </select>
+        <select
+          value={order}
+          onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
+          className="cursor-pointer text-gray-500"
+        >
+          <option value="asc">오름차순</option>
+          <option value="desc">내림차순</option>
+        </select>
         <button
           className="cursor-pointer text-gray-500"
           onClick={() => push(`${PROJECT_PAGE_PATH}/create`)}
         >
-          프로젝트 추가{" "}
+          프로젝트 추가
         </button>
       </section>
       <section>

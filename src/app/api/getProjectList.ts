@@ -7,7 +7,9 @@ import { LOGIN_PAGE_PATH } from "@/constant";
 
 export const getProjectList = async (
   offset: number,
-  max: number
+  max: number,
+  sort: "created" | "name",
+  order: "asc" | "desc"
 ): Promise<ProjectType> => {
   const token = cookies().get("token")?.value;
   const shortTermToken = cookies().get("shortTermToken")?.value;
@@ -18,7 +20,12 @@ export const getProjectList = async (
     new URL(
       `${
         process.env.NEXT_PUBLIC_API_BASE_URL
-      }/api${projectUrl.getProjectListUrl(offset.toString(), max.toString())}`,
+      }/api${projectUrl.getProjectListUrl(
+        offset.toString(),
+        max.toString(),
+        sort,
+        order
+      )}`,
       process.env.NEXT_PUBLIC_API_BASE_URL
     ),
     {

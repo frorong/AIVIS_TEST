@@ -9,13 +9,17 @@ import type { UseQueryOptions } from "@tanstack/react-query";
 export const useGetProjectList = (
   max: number,
   offset: number,
+  sort: "created" | "name",
+  order: "asc" | "desc",
   initialData?: ProjectType,
   options?: Omit<UseQueryOptions<ProjectType>, "queryKey">
 ) =>
   useQuery({
     queryKey: projectQueryKeys.getProjectListKey(
       offset.toString(),
-      max.toString()
+      max.toString(),
+      sort,
+      order
     ),
     queryFn: () =>
       get<ProjectType>(

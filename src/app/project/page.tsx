@@ -19,13 +19,30 @@ const Project: React.FC<Params> = async ({ searchParams }) => {
 
   const maxParam = searchParams?.max;
   const max = typeof maxParam === "string" ? parseInt(maxParam) : 10;
-  console.log(offsetParam, maxParam);
 
-  const projectList = await getProjectList(offset, max);
+  const sortParam = searchParams?.sort;
+  const sort = (typeof offsetParam === "string" ? sortParam : "created") as
+    | "name"
+    | "created";
+
+  const orderParam = searchParams?.order;
+  const order = (typeof orderParam === "string" ? orderParam : "desc") as
+    | "asc"
+    | "desc";
+
+  const projectList = await getProjectList(offset, max, sort, order);
 
   if (!token && !shortTermToken) redirect(LOGIN_PAGE_PATH);
 
-  return <ProjectPage initialData={projectList} offset={offset} max={max} />;
+  return (
+    <ProjectPage
+      initialData={projectList}
+      offset={offset}
+      max={max}
+      order={order}
+      sort={sort}
+    />
+  );
 };
 
 export default Project;
