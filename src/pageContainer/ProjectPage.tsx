@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ProjectPage: React.FC<Props> = ({ initialData, offset, max }) => {
-  const { data: projectList } = useGetProjectList(initialData);
+  const { data: projectList } = useGetProjectList(max, offset, initialData);
 
   const [totalPages, setTotalPages] = useState<number>(0);
 

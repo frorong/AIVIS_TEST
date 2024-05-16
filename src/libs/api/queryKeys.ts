@@ -3,6 +3,11 @@ export const authQueryKeys = {
 };
 
 export const projectQueryKeys = {
-  getProjectListKey: () => ["project", "list"],
+  getProjectListKey: (
+    offset?: string,
+    max?: string,
+    sort?: string,
+    order?: string
+  ) => ["project", "list", offset, max, sort, order],
   postProject: () => ["project", "create"],
 };

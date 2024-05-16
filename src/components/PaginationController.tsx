@@ -40,7 +40,7 @@ const PaginationController: React.FC<Props> = ({
             </button>
           </li>
 
-          {[...Array(totalPages).keys()].map((pageNumber) => (
+          {[...Array(totalPages - 1).keys()].map((pageNumber) => (
             <li
               key={pageNumber}
               className={`${ItemStyle} ${
