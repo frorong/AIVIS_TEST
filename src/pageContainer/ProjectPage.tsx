@@ -8,6 +8,7 @@ const ProjectPage = () => {
   const { data: projectList } = useGetProjectList();
 
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [perPageCount, setPerPageCount] = useState<number>(10);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {

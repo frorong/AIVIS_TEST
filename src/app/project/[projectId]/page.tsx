@@ -6,6 +6,7 @@ interface Params {
   params: {
     projectId: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 const ProjectDetail: React.FC<Params> = async ({ params: { projectId } }) => {
