@@ -3,7 +3,7 @@ export interface ProjectType {
   offset: number;
   size: number;
   totalPages: number;
-  collection: CollectionType;
+  collection: CollectionType[];
 }
 
 export interface CollectionType {
@@ -13,7 +13,7 @@ export interface CollectionType {
   numberOfSlides: number;
   numberOfImages: number;
   isReadOnly: boolean;
-  ontologyName: unknown;
+  ontologyName: string | null;
   id: number;
   class: string;
   ontology: unknown;
