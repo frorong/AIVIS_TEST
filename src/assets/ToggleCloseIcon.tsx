@@ -1,24 +1,24 @@
-const ToggleOnIcon = () => (
+const ToggleCloseIcon = () => (
   <svg
-    width="200"
-    height="90"
-    viewBox="0 0 200 90"
+    width="54"
+    height="31"
+    viewBox="0 0 54 31"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g filter="url(#filter0_i_1_1141)">
-      <rect width="200" height="90" rx="45" fill="#EFEFEF" />
+      <rect x="2" y="3" width="52" height="23.4" rx="11.7" fill="#EFEFEF" />
     </g>
     <g filter="url(#filter1_d_1_1141)">
-      <circle cx="45" cy="45" r="35" fill="url(#paint0_linear_1_1141)" />
+      <circle cx="13.7" cy="14.7" r="9.1" fill="url(#paint0_linear_1_1141)" />
     </g>
     <defs>
       <filter
         id="filter0_i_1_1141"
-        x="0"
-        y="0"
-        width="200"
-        height="96"
+        x="2"
+        y="3"
+        width="52"
+        height="29.4"
         filterUnits="userSpaceOnUse"
         color-interpolation-filters="sRGB"
       >
@@ -56,10 +56,10 @@ const ToggleOnIcon = () => (
       </filter>
       <filter
         id="filter1_d_1_1141"
-        x="6"
-        y="5"
-        width="82"
-        height="82"
+        x="0.600006"
+        y="0.599976"
+        width="30.2"
+        height="30.2"
         filterUnits="userSpaceOnUse"
         color-interpolation-filters="sRGB"
       >
@@ -90,10 +90,10 @@ const ToggleOnIcon = () => (
       </filter>
       <linearGradient
         id="paint0_linear_1_1141"
-        x1="45"
-        y1="10"
-        x2="45"
-        y2="80"
+        x1="13.7"
+        y1="5.59998"
+        x2="13.7"
+        y2="23.8"
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="white" />
@@ -103,4 +103,4 @@ const ToggleOnIcon = () => (
   </svg>
 );
 
-export default ToggleOnIcon;
+export default ToggleCloseIcon;

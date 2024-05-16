@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { CollectionType } from "@/types";
+import { ToggleCloseIcon, ToggleOpenIcon } from "@/assets";
 
 const ProjectCard: React.FC<CollectionType> = ({
   id,
@@ -25,21 +26,7 @@ const ProjectCard: React.FC<CollectionType> = ({
           onClick={() => setIsOpen((prev) => !prev)}
           className="text-gray-500"
         >
-          <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            {isOpen ? (
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M12 7V17H11V7H12ZM11 18H13V19H11V18ZM11 5H13V6H11V5ZM7 11H17V12H7V11Z"
-              />
-            ) : (
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M12 7V17H11V7H12ZM11 18H13V19H11V18ZM11 5H13V6H11V5Z"
-              />
-            )}
-          </svg>
+          {isOpen ? <ToggleOpenIcon /> : <ToggleCloseIcon />}
         </button>
       </div>
       {isOpen && (
