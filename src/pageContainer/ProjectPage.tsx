@@ -2,7 +2,7 @@
 
 import { useGetProjectList } from "@/hooks";
 import { ProjectCard, PaginationController } from "@/components";
-import { ProjectType } from "@/types";
+import { ProjectType, sortType, orderType } from "@/types";
 
 import { useEffect, useState } from "react";
 import { PROJECT_PAGE_PATH } from "@/constant";
@@ -12,8 +12,8 @@ interface Props {
   initialData: ProjectType;
   offset: number;
   max: number;
-  sort: "created" | "name";
-  order: "asc" | "desc";
+  sort: sortType;
+  order: orderType;
 }
 
 const ProjectPage: React.FC<Props> = ({
@@ -32,8 +32,8 @@ const ProjectPage: React.FC<Props> = ({
   );
 
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [order, setOrder] = useState<"desc" | "asc">(initialOrder);
-  const [sort, setSort] = useState<"created" | "name">(initialSort);
+  const [order, setOrder] = useState<orderType>(initialOrder);
+  const [sort, setSort] = useState<sortType>(initialSort);
 
   const { push } = useRouter();
 
@@ -72,7 +72,7 @@ const ProjectPage: React.FC<Props> = ({
         )}
         <select
           value={sort}
-          onChange={(e) => setSort(e.target.value as "created" | "name")}
+          onChange={(e) => setSort(e.target.value as sortType)}
           className="cursor-pointer text-gray-500"
         >
           <option value="created">created</option>
@@ -80,7 +80,7 @@ const ProjectPage: React.FC<Props> = ({
         </select>
         <select
           value={order}
-          onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
+          onChange={(e) => setOrder(e.target.value as orderType)}
           className="cursor-pointer text-gray-500"
         >
           <option value="asc">오름차순</option>

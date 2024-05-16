@@ -38,3 +38,6 @@ export interface ProjectRequestType {
   name: string;
   ontologyId: number;
 }
+
+export type orderType = "asc" | "desc";
+export type sortType = "created" | "name";

@@ -2,14 +2,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { projectUrl } from "@/libs";
-import type { ProjectType } from "@/types";
+import type { ProjectType, sortType, orderType } from "@/types";
 import { LOGIN_PAGE_PATH } from "@/constant";
 
 export const getProjectList = async (
   offset: number,
   max: number,
-  sort: "created" | "name",
-  order: "asc" | "desc"
+  sort: sortType,
+  order: orderType
 ): Promise<ProjectType> => {
   const token = cookies().get("token")?.value;
   const shortTermToken = cookies().get("shortTermToken")?.value;
