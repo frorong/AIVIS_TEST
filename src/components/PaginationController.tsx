@@ -1,15 +1,19 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   currentPage: number;
   totalPages: number;
-  onPageChange: (pageNumber: number) => void;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
+
+const ItemStyle =
+  "border-black border-solid border-2 pagination-item w-8 cursor-pointer" as const;
+const ButtonStyle = "text-gray-500 cursor-pointer" as const;
 
 const PaginationController: React.FC<Props> = ({
   currentPage,
   totalPages,
-  onPageChange,
+  setCurrentPage,
 }) => {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
@@ -17,12 +21,12 @@ const PaginationController: React.FC<Props> = ({
   return (
     <div className="flex justify-center mt-4">
       <nav>
-        <ul className="pagination">
-          <li className={`pagination-item ${isFirstPage ? "disabled" : ""}`}>
-            <button
-              onClick={() => onPageChange(currentPage - 1)}
-              disabled={isFirstPage}
-            >
+        <ul className="pagination flex">
+          <li
+            className={`${ItemStyle} ${isFirstPage ? "disabled" : ""}`}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            <button className={ButtonStyle} disabled={isFirstPage}>
               이전
             </button>
           </li>
@@ -30,21 +34,20 @@ const PaginationController: React.FC<Props> = ({
           {[...Array(totalPages).keys()].map((pageNumber) => (
             <li
               key={pageNumber}
-              className={`pagination-item ${
+              className={`${ItemStyle} ${
                 pageNumber + 1 === currentPage ? "active" : ""
               }`}
+              onClick={() => setCurrentPage(pageNumber + 1)}
             >
-              <button onClick={() => onPageChange(pageNumber + 1)}>
-                {pageNumber + 1}
-              </button>
+              <button className={ButtonStyle}>{pageNumber + 1}</button>
             </li>
           ))}
 
-          <li className={`pagination-item ${isLastPage ? "disabled" : ""}`}>
-            <button
-              onClick={() => onPageChange(currentPage + 1)}
-              disabled={isLastPage}
-            >
+          <li
+            className={`${ItemStyle} ${isLastPage ? "disabled" : ""}`}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            <button className={ButtonStyle} disabled={isLastPage}>
               다음
             </button>
           </li>
